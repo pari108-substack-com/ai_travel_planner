@@ -1,6 +1,18 @@
 version: "3.8"
 
 services:
+
+  postgres:
+    image: postgres:15
+    container_name: ai_travel_postgres
+    environment:
+      POSTGRES_DB: ai_travel_planner
+      POSTGRES_USER: ai_user
+      POSTGRES_PASSWORD: pass1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
   backend:
     build: ./backend
     ports:
@@ -12,3 +24,6 @@ services:
     build: ./frontend
     ports:
       - "5173:5173"
+
+volumes:
+  postgres_data:
